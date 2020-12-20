@@ -203,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AtaSmart.h" />
+    <ClInclude Include="Cdie.h" />
     <ClInclude Include="CrystalDiskInfoEmbedded.h" />
     <ClInclude Include="DnpService.h" />
     <ClInclude Include="framework.h" />
