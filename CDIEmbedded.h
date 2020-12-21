@@ -82,6 +82,11 @@ extern "C" __declspec(dllexport) _SMART_ATTRIBUTE* GetSmart(CAtaSmart* ptr, int 
 	return ptr->vars[index].Attribute;
 }
 
+extern "C" __declspec(dllexport) unsigned long GetTotalDiskSize(CAtaSmart* ptr, int index)
+{
+	return ptr->vars[index].TotalDiskSize;
+}
+
 extern "C" __declspec(dllexport) int GetDiskCount(CAtaSmart* ptr)
 {
 	return ptr->vars.GetCount();
