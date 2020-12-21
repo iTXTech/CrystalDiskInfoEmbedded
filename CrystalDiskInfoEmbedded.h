@@ -8,7 +8,7 @@
 #endif
 
 #include "resource.h"		// 主符号
-#include "Cdie.h"
+#include "CDIEmbedded.h"
 
 
 // CCrystalDiskInfoEmbeddedApp
