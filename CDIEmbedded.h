@@ -46,9 +46,10 @@ char* csToString(CString str)
 	auto len = str.GetLength() + 1;
 	auto buff = new TCHAR[len];
 	memcpy(buff, (LPCTSTR)str, sizeof(TCHAR) * (len));
-	char* charBuf = new char[len];
+	auto charBuf = (char*)CoTaskMemAlloc(len);
 	size_t converted;
 	wcstombs_s(&converted, charBuf, len, buff, len);
+	delete[] buff;
 	return charBuf;
 }
 
