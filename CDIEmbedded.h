@@ -92,3 +92,50 @@ extern "C" __declspec(dllexport) int GetDiskCount(CAtaSmart* ptr)
 {
 	return ptr->vars.GetCount();
 }
+
+extern "C" __declspec(dllexport) bool CreateRandomFile(const char* path, int size)
+{
+	CString TestFilePath(path);
+	auto hFile = ::CreateFile(TestFilePath, GENERIC_READ | GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
+	                          FILE_ATTRIBUTE_NORMAL | FILE_FLAG_NO_BUFFERING | FILE_FLAG_SEQUENTIAL_SCAN, NULL);
+
+	if (hFile == INVALID_HANDLE_VALUE)
+	{
+		return false;
+	}
+
+	// COMPRESSION_FORMAT_NONE
+	USHORT lpInBuffer = COMPRESSION_FORMAT_NONE;
+	DWORD lpBytesReturned = 0;
+	DeviceIoControl(hFile, FSCTL_SET_COMPRESSION, (LPVOID)&lpInBuffer,
+	                sizeof(USHORT), NULL, 0, (LPDWORD)&lpBytesReturned, NULL);
+
+	// Fill Test Data
+	char* buf = NULL;
+	int BufSize;
+	int Loop;
+	int i;
+	DWORD writesize;
+	BufSize = 1024 * 1024;
+	Loop = size;
+
+	buf = (char*)VirtualAlloc(NULL, BufSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+	if (buf == NULL)
+	{
+		return false;
+	}
+
+	for (i = 0; i < BufSize; i++)
+	{
+		buf[i] = (char)(rand() % 256);
+	}
+
+
+	for (i = 0; i < Loop; i++)
+	{
+		WriteFile(hFile, buf, BufSize, &writesize, NULL);
+	}
+	VirtualFree(buf, 0, MEM_RELEASE);
+	CloseHandle(hFile);
+	return true;
+}
