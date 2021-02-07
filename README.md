@@ -6,13 +6,15 @@ This project wraps `CDI` into a MFC DLL which can be used by other programs.
 
 Based on the great [CrystalDiskInfo](https://github.com/hiyohiyo/CrystalDiskInfo).
 
+**Current Upstream Version: `8.9.0`**
+
 
 ## License
 
     The MIT License
 
-    Copyright (c) 2008-2020 hiyohiyo
-    Copyright (c) 2020 iTX Technologies
+    Copyright (c) 2008-2021 hiyohiyo
+    Copyright (c) 2020-2021 iTX Technologies
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
